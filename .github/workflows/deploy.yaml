@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -17,5 +18,9 @@ jobs:
             if [ "$(docker ps -aq -f name=postgresql-dev)" ]; then
               docker start postgresql-dev || true
             else
-              docker run -d --name postgresql-dev -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e POSTGRES_DB=${{ secrets.POSTGRES_DB }} -p 5432:5432 postgres:15
+              docker run -d --name postgresql-dev \
+                -e POSTGRES_USER=*** \
+                -e POSTGRES_PASSWORD=*** \
+                -e POSTGRES_DB=*** \
+                -p 5432:5432 postgres:15
             fi
